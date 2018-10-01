@@ -27,8 +27,10 @@ def snapshots():
 @snapshots.command('list')
 @click.option('--project',default=None,
     help="Only snapshots for project (tag project:<name>)")
+@click.option('--all','list_all',default=False,is_flag=True,
+    help="List all snapshots of instances volume not just recent ones")
 
-def list_snapshots(project):
+def list_snapshots(project, list_all):
     "List EC2 snapshots"
 
     instances = filter_instances(project)
@@ -43,9 +45,10 @@ def list_snapshots(project):
                 s.progress,
                 s.start_time.strftime("%c")
                 )))
+
+                #shows only one recent snapshot of a volume
+                if s.state =='completed' and not list_all:break
     return
-
-
 
 @cli.group('volumes')
 def volumes():
