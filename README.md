@@ -13,4 +13,8 @@ e.g.
 
 ## Running
 
-`pipenv run python shotty/no_of_instance.py`
+`pipenv run python shotty/no_of_instance.py <command>
+<--project=NAME>`
+
+*command* is list, start or stop
+*project* is optional
